@@ -12,6 +12,8 @@ Para tratamento de erro para o usuário foi adicionar toast na aplicação.
 
 Um contexto para gerenciar as séries foi criado sendo utilizado nas páginas da aplicação (Home, Detail).
 
+Resposividade foi adicionada em ambas as páginas criadas.
+
 Testes automatizados não foram implementados.
 
 ## Como executar
