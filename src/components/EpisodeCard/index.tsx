@@ -1,19 +1,12 @@
 import styles from "@/components/EpisodeCard/styles.module.scss";
 import { Episode } from "@/context/shows/types";
+import { removeTagsFromText } from "@/utils/removeTagsFromText";
 
 type EpisodeCardProps = {
   episode: Episode;
 };
 
 export function EpisodeCard({ episode }: EpisodeCardProps) {
-  const removeTagsFromText = ({ text }: { text: string }) => {
-    return text
-      .replace("<p>", "")
-      .replace("</p>", "")
-      .replace("<b>", "")
-      .replace("</b>", "");
-  };
-
   return (
     <div className={styles.container}>
       <img src={episode?.image?.original} alt="" />

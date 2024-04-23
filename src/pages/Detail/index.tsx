@@ -12,23 +12,8 @@ export function Detail() {
     loading,
     onSelectSeason,
     episodesBySeason,
+    loadSeasonsAndEpisodes,
   } = useContext(ShowsContext);
-
-  const removeTagsFromText = ({ value }: { value: string }) => {
-    return value
-      .replace("<p>", "")
-      .replace("</p>", "")
-      .replace("<b>", "")
-      .replace("</b>", "");
-  };
-
-  const handleSelectSeason = ({
-    seasonNumber = 1,
-  }: {
-    seasonNumber?: number;
-  }) => {
-    onSelectSeason({ seasonNumber });
-  };
 
   const Info = ({ title, value }: { title: string; value: string }) => {
     return (
@@ -40,7 +25,7 @@ export function Detail() {
   };
 
   useEffect(() => {
-    handleSelectSeason({});
+    loadSeasonsAndEpisodes();
   }, []);
 
   if (loading) {
@@ -67,7 +52,9 @@ export function Detail() {
               <Info title="Genres" value={""} />
               <div className={styles.genderCards}>
                 {show?.genres?.map((gender) => (
-                  <span className={styles.genderCard}>{gender}</span>
+                  <span key={gender} className={styles.genderCard}>
+                    {gender}
+                  </span>
                 ))}
               </div>
             </div>
@@ -80,12 +67,13 @@ export function Detail() {
             <select
               name="seasons"
               onChange={(event) =>
-                handleSelectSeason({ seasonNumber: Number(event.target.value) })
+                onSelectSeason({ seasonNumber: Number(event.target.value) })
               }
             >
-              {seasons.map((season) => (
+              {seasons?.map((season) => (
                 <option
                   value={season.number}
+                  key={season.id}
                 >{`Season ${season.number}`}</option>
               ))}
             </select>
@@ -96,10 +84,4 @@ export function Detail() {
       </div>
     </div>
   );
-}
-
-{
-  /* <Link to="/" className={styles.backButton}>
-          <button>{`< Voltar`}</button>
-        </Link> */
 }

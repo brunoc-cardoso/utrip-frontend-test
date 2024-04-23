@@ -1,46 +1,17 @@
+import {
+  ReactNode,
+  createContext,
+  useCallback,
+  useEffect,
+  useState,
+} from "react";
+
+import { Episode, Season, Show, ShowsGrouped } from "@/context/shows/types";
 import { getEpisodes, getSeasons, getShows } from "@/services/shows";
-import { ReactNode, createContext, useState } from "react";
-
-type Show = {
-  id: number;
-  name: string;
-  genres: string[];
-  image: {
-    medium: string;
-    original: string;
-  };
-  summary: string;
-  rating: {
-    average: number;
-  };
-  status: string;
-  premiered: string;
-  ended: string;
-};
-
-type Episode = {
-  id: number;
-  name: string;
-  summary: string;
-  image: {
-    medium: string;
-    original: string;
-  };
-  runtime: number;
-  season: number;
-  number: number;
-};
-
-type Season = {
-  id: number;
-  number: number;
-  episodeOrder: number;
-};
-
-type ShowsGrouped = {
-  shows: Show[];
-  gender: string;
-};
+import {
+  getItemFromLocalStorage,
+  setItemOnLocalStorage,
+} from "@/utils/localStorage";
 
 type ShowsContext = {
   showsGrouped: ShowsGrouped[];
@@ -51,6 +22,7 @@ type ShowsContext = {
   selectedShow: Show;
   onSelectSeason: ({ seasonNumber }: { seasonNumber: number }) => void;
   loadShows: () => void;
+  loadSeasonsAndEpisodes: () => void;
   episodesBySeason: Episode[];
 };
 
@@ -61,16 +33,11 @@ export function ShowsContextProvider({ children }: { children: ReactNode }) {
   const [showsGrouped, setShowsGrouped] = useState<ShowsGrouped[]>([]);
   const [episodes, setEpisodes] = useState<Episode[]>([]);
   const [seasons, setSeasons] = useState<Season[]>([]);
-  const [selectedShow, setSelectedShow] = useState<Show>({} as Show);
   const [episodesBySeason, setEpisodesBySeason] = useState<Episode[]>([]);
-
-  const onSelectSeason = ({ seasonNumber = 1 }: { seasonNumber?: number }) => {
-    const filteredEpisodes = episodes.filter(
-      (episode) => episode.season === seasonNumber
-    );
-
-    setEpisodesBySeason(filteredEpisodes);
-  };
+  const [selectedShow, setSelectedShow] = useState<Show>(() => {
+    const show = getItemFromLocalStorage({ key: "selectedShow" });
+    return show ? show : ({} as Show);
+  });
 
   const loadEpisodes = async ({ showId }: { showId: number }) => {
     const loadedEpisodes = await getEpisodes({ showId });
@@ -85,6 +52,17 @@ export function ShowsContextProvider({ children }: { children: ReactNode }) {
   const loadShows = async () => {
     const shows = await getShows();
     groupByGender({ shows });
+  };
+
+  const loadSeasonsAndEpisodes = async () => {
+    setLoading(true);
+
+    await Promise.all([
+      await loadEpisodes({ showId: selectedShow.id }),
+      await loadSeasons({ showId: selectedShow.id }),
+    ]);
+
+    setLoading(false);
   };
 
   const groupByGender = ({ shows }: { shows: Show[] }) => {
@@ -120,18 +98,30 @@ export function ShowsContextProvider({ children }: { children: ReactNode }) {
     setShowsGrouped([...showsGroupedByGender, ...showsWithoutGender]);
   };
 
+  const onSelectSeason = useCallback(
+    ({ seasonNumber = 1 }: { seasonNumber?: number }) => {
+      const filteredEpisodes = episodes.filter(
+        (episode) => episode.season === seasonNumber
+      );
+
+      setEpisodesBySeason(filteredEpisodes);
+    },
+    [episodes]
+  );
+
   const handleSelectShow = async ({ show }: { show: Show }) => {
     setLoading(true);
 
     setSelectedShow(show);
+    setItemOnLocalStorage({ key: "selectedShow", value: JSON.stringify(show) });
 
-    await Promise.all([
-      loadEpisodes({ showId: show.id }),
-      loadSeasons({ showId: show.id }),
-    ]);
-
+    await loadSeasonsAndEpisodes();
     setLoading(false);
   };
+
+  useEffect(() => {
+    onSelectSeason({ seasonNumber: 1 });
+  }, [episodes, onSelectSeason, seasons]);
 
   return (
     <ShowsContext.Provider
@@ -145,6 +135,7 @@ export function ShowsContextProvider({ children }: { children: ReactNode }) {
         selectedShow,
         onSelectSeason,
         episodesBySeason,
+        loadSeasonsAndEpisodes,
       }}
     >
       {children}

@@ -10,11 +10,11 @@ export function Content() {
   return (
     <div className={styles.container}>
       {showsGrouped?.map(({ gender, shows }) => (
-        <div className={styles.listContainer}>
+        <div className={styles.listContainer} key={gender}>
           <h3>{gender}</h3>
           <div className={styles.list}>
             {shows.map((show) => (
-              <Link to="/details" className={styles.textLink}>
+              <Link to="/details" className={styles.textLink} key={show.id}>
                 <div
                   className={styles.card}
                   onClick={() => handleSelectShow({ show })}

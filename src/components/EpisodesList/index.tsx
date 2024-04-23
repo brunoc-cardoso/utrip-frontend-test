@@ -10,7 +10,7 @@ export function EpisodesList({ episodes }: EpisodesListProps) {
   return (
     <div className={styles.container}>
       {episodes?.map((episode) => (
-        <EpisodeCard episode={episode} />
+        <EpisodeCard key={episode.id} episode={episode} />
       ))}
     </div>
   );
