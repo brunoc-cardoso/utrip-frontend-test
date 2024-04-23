@@ -2,6 +2,7 @@ import { useContext, useEffect } from "react";
 
 import { EpisodesList } from "@/components/EpisodesList";
 import { Header } from "@/components/Header";
+import { LoadingComponent } from "@/components/LoadingComponent";
 import { ShowsContext } from "@/context/shows";
 import styles from "@/pages/Detail/styles.module.scss";
 
@@ -28,60 +29,60 @@ export function Detail() {
     loadSeasonsAndEpisodes();
   }, []);
 
-  if (loading) {
-    return <span>carregando ...</span>;
-  }
-
   return (
     <div className={styles.container}>
       <Header />
 
-      <div className={styles.content}>
-        <div className={styles.info}>
-          <div className={styles.coverContainer}>
-            <img src={show?.image?.original || show?.image?.medium} alt="" />
-          </div>
+      {loading && <LoadingComponent />}
 
-          <div className={styles.infoContent}>
-            <Info title="Title" value={show.name} />
-            <Info title="Description" value={show.summary} />
-            <Info title="Release date" value={show.premiered} />
-            <Info title="Status" value={show.status} />
+      {!loading && (
+        <div className={styles.content}>
+          <div className={styles.info}>
+            <div className={styles.coverContainer}>
+              <img src={show?.image?.original || show?.image?.medium} alt="" />
+            </div>
 
-            <div className={styles.genderContainer}>
-              <Info title="Genres" value={""} />
-              <div className={styles.genderCards}>
-                {show?.genres?.map((gender) => (
-                  <span key={gender} className={styles.genderCard}>
-                    {gender}
-                  </span>
-                ))}
+            <div className={styles.infoContent}>
+              <Info title="Title" value={show.name} />
+              <Info title="Description" value={show.summary} />
+              <Info title="Release date" value={show.premiered} />
+              <Info title="Status" value={show.status} />
+
+              <div className={styles.genderContainer}>
+                <Info title="Genres" value={""} />
+                <div className={styles.genderCards}>
+                  {show?.genres?.map((gender) => (
+                    <span key={gender} className={styles.genderCard}>
+                      {gender}
+                    </span>
+                  ))}
+                </div>
               </div>
             </div>
           </div>
-        </div>
 
-        <div className={styles.seasons}>
-          <div className={styles.selectContainer}>
-            <span>Select a season</span>
-            <select
-              name="seasons"
-              onChange={(event) =>
-                onSelectSeason({ seasonNumber: Number(event.target.value) })
-              }
-            >
-              {seasons?.map((season) => (
-                <option
-                  value={season.number}
-                  key={season.id}
-                >{`Season ${season.number}`}</option>
-              ))}
-            </select>
+          <div className={styles.seasons}>
+            <div className={styles.selectContainer}>
+              <span>Select a season</span>
+              <select
+                name="seasons"
+                onChange={(event) =>
+                  onSelectSeason({ seasonNumber: Number(event.target.value) })
+                }
+              >
+                {seasons?.map((season) => (
+                  <option
+                    value={season.number}
+                    key={season.id}
+                  >{`Season ${season.number}`}</option>
+                ))}
+              </select>
+            </div>
+
+            <EpisodesList episodes={episodesBySeason} />
           </div>
-
-          <EpisodesList episodes={episodesBySeason} />
         </div>
-      </div>
+      )}
     </div>
   );
 }
