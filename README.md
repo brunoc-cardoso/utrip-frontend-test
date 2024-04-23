@@ -44,8 +44,13 @@ npm run dev # Para executar a aplicação
 
 Acessando a aplicação na URL (http://localhost:5173), a home será aberta, nela será carregada séries divididas por suas categorias.
 
-Ao clicar sobre uma série a página de 'Details' será aberta mostrando mais informações sobre ela. Como nome, data de lançamento, descrição capa, temporadas e episódios. As temporadas podem ser selecionadas e será listado os episódios relacionados a ela.
+Ao clicar sobre uma série a página de 'Details' será aberta mostrando mais informações sobre ela. Como nome, data de lançamento, descrição capa, temporadas e episódios. As tem
+poradas podem ser selecionadas e será listado os episódios relacionados a ela.
 
 Para voltar para Home, pode se clicar no logo no header.
 
 _A barra de busca e perfil do usuário não foram implementados._
+
+![Screenshot 2024-04-23 at 19 41 10](https://github.com/brunoc-cardoso/utrip-frontend-test/assets/33553892/f91a9d3c-b3e0-4659-89b6-2118c356bed4)
+![Screenshot 2024-04-23 at 19 41 00](https://github.com/brunoc-cardoso/utrip-frontend-test/assets/33553892/6170e03b-8b1d-48fe-aff9-017eba380f2b)
+
