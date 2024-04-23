@@ -1,30 +1,51 @@
-# React + TypeScript + Vite
+# Utrip front-end test
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Descrição do projeto
 
-Currently, two official plugins are available:
+O projeto consiste em uma aplicação simples para listagem de series.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Componentes foram criados para serem reaproveitados em outros componentes e para criar a tela final.
 
-## Expanding the ESLint configuration
+Apenas um serviço foi criado, onde fica localizado as chamadas para a API (https://www.tvmaze.com/api). Das quais foram utilizadas para listagem de series, listagem de temporadas e listagem de episódios.
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+Para tratamento de erro para o usuário foi adicionar toast na aplicação.
 
-- Configure the top-level `parserOptions` property like this:
+Um contexto para gerenciar as séries foi criado sendo utilizado nas páginas da aplicação (Home, Detail).
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
+Testes automatizados não foram implementados.
+
+## Como executar
+
+```sh
+npm install # Para adicionar as bibliotecas
+
+npm run dev # Para executar a aplicação
 ```
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+## Tecnologias utilizadas
+
+- React
+- Typescript
+- ViteJS
+- Scss
+
+## Estrutura do projeto
+
+    src
+      components      # Componentes utilizados na aplicação.
+      context         # Gerenciamento de contexto.
+      pages           # As páginas finais, que serão utilizadas nas rotas.
+      routes          # Todo o sistema de rotas da aplicação.
+      services        # As chamadas a serviços externos, APIs por exemplo.
+
+    root              # Arquivos de configuração do projeto.
+
+## Uso da aplicação
+
+Acessando a aplicação na URL (http://localhost:5173), a home será aberta, nela será carregada séries divididas por suas categorias.
+
+Ao clicar sobre uma série a página de 'Details' será aberta mostrando mais informações sobre ela. Como nome, data de lançamento, descrição capa, temporadas e episódios. As temporadas podem ser selecionadas e será listado os episódios relacionados a ela.
+
+Para voltar para Home, pode se clicar no logo no header.
+
+_A barra de busca e perfil do usuário não foram implementados._
