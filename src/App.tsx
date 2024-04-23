@@ -1,3 +1,11 @@
+import { ShowsContextProvider } from "@/context/shows";
+import "@/global.scss";
+import { Router } from "@/routes";
+
 export function App() {
-  return <h1>Hello World</h1>;
+  return (
+    <ShowsContextProvider>
+      <Router />
+    </ShowsContextProvider>
+  );
 }
