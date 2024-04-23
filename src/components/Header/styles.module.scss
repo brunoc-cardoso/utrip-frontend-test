@@ -1,0 +1,74 @@
+.container {
+  position: fixed;
+  top: 0;
+  width: 100%;
+
+  background: rgba(255, 255, 255, 0.8);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1280px;
+  margin: auto;
+  height: 6rem;
+  padding: 0 2.4rem;
+}
+
+.logoContainer {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  text-decoration: inherit;
+  color: inherit;
+  cursor: pointer;
+
+  span {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: #52525b;
+  }
+}
+
+.inputContainer {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+
+  input {
+    width: 32rem;
+    height: 3.2rem;
+    border: 1px solid #52525b;
+    border-radius: 0.8rem;
+    outline: none;
+    padding: 0.8rem 1.6rem;
+    font-size: 1.4rem;
+
+    &::placeholder {
+      color: gray;
+    }
+  }
+
+  @media screen and (max-width: 768px) {
+    display: none;
+  }
+}
+
+.profile {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: yellow;
+  width: 4.4rem;
+  height: 4.4rem;
+  border: 2px solid #52525b;
+  border-radius: 50%;
+
+  span {
+    font-size: 2rem;
+  }
+}
