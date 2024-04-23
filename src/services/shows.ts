@@ -1,3 +1,5 @@
+import { toast } from "react-toastify";
+
 import { BASE_URL } from "@/services/index";
 
 export const getShows = async () => {
@@ -7,7 +9,7 @@ export const getShows = async () => {
 
     return data;
   } catch (error) {
-    console.error("[error]: ", error);
+    toast.error("An error occurred while loading data from Shows.");
   }
 };
 
@@ -18,7 +20,7 @@ export const getSeasons = async ({ showId }: { showId: number }) => {
 
     return data;
   } catch (error) {
-    console.error("[error]: ", error);
+    toast.error("An error occurred while loading data from Seasons.");
   }
 };
 
@@ -29,6 +31,6 @@ export const getEpisodes = async ({ showId }: { showId: number }) => {
 
     return data;
   } catch (error) {
-    console.error("[error]: ", error);
+    toast.error("An error occurred while loading data from Episodes.");
   }
 };

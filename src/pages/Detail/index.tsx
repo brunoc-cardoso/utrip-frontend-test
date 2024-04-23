@@ -5,6 +5,7 @@ import { Header } from "@/components/Header";
 import { LoadingComponent } from "@/components/LoadingComponent";
 import { ShowsContext } from "@/context/shows";
 import styles from "@/pages/Detail/styles.module.scss";
+import { removeTagsFromText } from "@/utils/removeTagsFromText";
 
 export function Detail() {
   const {
@@ -44,7 +45,10 @@ export function Detail() {
 
             <div className={styles.infoContent}>
               <Info title="Title" value={show.name} />
-              <Info title="Description" value={show.summary} />
+              <Info
+                title="Description"
+                value={removeTagsFromText({ text: show.summary })}
+              />
               <Info title="Release date" value={show.premiered} />
               <Info title="Status" value={show.status} />
 
