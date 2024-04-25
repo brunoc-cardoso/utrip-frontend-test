@@ -28,7 +28,7 @@
   flex-direction: row;
   gap: 3.2rem;
 
-  @media screen and (max-width: 425px) {
+  @media screen and (max-width: 760px) {
     flex-direction: column;
   }
 }
@@ -40,8 +40,29 @@
   gap: 2.4rem;
   padding-top: 2.4rem;
 
-  @media screen and (max-width: 320px) {
-    padding: 0px;
+  strong {
+    font-size: 1.8rem;
+  }
+
+  span {
+    font-size: 1.6rem;
+    line-height: 1.4;
+  }
+
+  @media screen and (max-width: 950px) {
+    padding: 0;
+  }
+}
+
+.infoDetails {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  gap: 2rem;
+
+  @media screen and (max-width: 840px) {
+    flex-direction: column;
+    align-items: flex-start;
   }
 }
 
@@ -49,26 +70,33 @@
   img {
     max-width: 34rem;
     height: auto;
-    border-radius: 1.2rem;
+    border-radius: 12px;
   }
 
-  @media screen and (max-width: 425px) and (min-width: 345px) {
+  @media screen and (max-width: 760px) {
     margin: 0 auto;
+    img {
+      max-width: 35rem;
+    }
   }
 
-  @media screen and (max-width: 320px) {
+  @media screen and (max-width: 390px) {
     img {
       max-width: 28rem;
-      padding: 1.2rem;
-      border-radius: 1.2rem;
     }
   }
 }
 
 .genderContainer {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  align-items: center;
   gap: 1.2rem;
+
+  @media screen and (max-width: 360px) {
+    flex-direction: column;
+    align-items: flex-start;
+  }
 }
 
 .genderCards {
@@ -79,10 +107,9 @@
 
 .genderCard {
   display: flex;
-  justify-content: center;
   align-items: center;
   border: 1px solid grey;
-  border-radius: 0.8rem;
+  border-radius: 8px;
   padding: 0.4rem 0.8rem;
 }
 
@@ -107,7 +134,7 @@
     width: 100%;
     max-width: 40rem;
     height: 3rem;
-    border-radius: 0.8rem;
+    border-radius: 8px;
     padding: 0 0.8rem;
     font-size: 1.6rem;
   }

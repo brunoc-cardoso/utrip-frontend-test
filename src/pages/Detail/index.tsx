@@ -49,18 +49,21 @@ export function Detail() {
                 title="Description"
                 value={removeTagsFromText({ text: show.summary })}
               />
-              <Info title="Release date" value={show.premiered} />
-              <Info title="Status" value={show.status} />
+            </div>
+          </div>
 
-              <div className={styles.genderContainer}>
-                <Info title="Genres" value={""} />
-                <div className={styles.genderCards}>
-                  {show?.genres?.map((gender) => (
-                    <span key={gender} className={styles.genderCard}>
-                      {gender}
-                    </span>
-                  ))}
-                </div>
+          <div className={styles.infoDetails}>
+            <Info title="Release date" value={show.premiered} />
+            <Info title="Status" value={show.status} />
+
+            <div className={styles.genderContainer}>
+              <Info title="Genres" value={""} />
+              <div className={styles.genderCards}>
+                {show?.genres?.map((gender) => (
+                  <span key={gender} className={styles.genderCard}>
+                    {gender}
+                  </span>
+                ))}
               </div>
             </div>
           </div>
