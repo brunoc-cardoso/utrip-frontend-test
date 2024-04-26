@@ -9,7 +9,13 @@ type EpisodeCardProps = {
 export function EpisodeCard({ episode }: EpisodeCardProps) {
   return (
     <div className={styles.container}>
-      <img src={episode?.image?.original} alt="" />
+      <div className={styles.imageContainer}>
+        {episode?.image?.original ? (
+          <img src={episode?.image?.original} alt="" />
+        ) : (
+          <span>No image</span>
+        )}
+      </div>
       <div className={styles.cardInfo}>
         <span>
           <strong>{episode.name}</strong>

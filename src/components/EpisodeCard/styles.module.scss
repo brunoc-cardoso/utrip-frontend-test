@@ -3,11 +3,6 @@
   display: flex;
   flex-direction: column;
 
-  img {
-    width: 100%;
-    min-width: 24rem;
-  }
-
   div {
     display: flex;
     flex-direction: column;
@@ -19,5 +14,20 @@
       -webkit-box-orient: vertical;
       overflow: hidden;
     }
+  }
+}
+
+.imageContainer {
+  width: 24rem;
+  height: 13.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: lightgray;
+  border-radius: 8px;
+
+  img {
+    width: 100%;
+    min-width: 24rem;
   }
 }
