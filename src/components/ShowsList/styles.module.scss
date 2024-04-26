@@ -1,7 +1,6 @@
 .container {
   display: flex;
   flex-direction: column;
-  gap: 1.2rem;
   max-width: 1280px;
   margin: 6rem auto 0;
   padding: 4.8rem;
@@ -15,14 +14,9 @@
 .listContainer {
   display: flex;
   flex-direction: column;
-  gap: 0.8rem;
 
   h3 {
     font-size: 2rem;
-  }
-
-  span {
-    font-size: 1.6rem;
   }
 }
 
@@ -40,15 +34,13 @@
 }
 
 .card {
+  width: 16rem;
   display: flex;
   flex-direction: column;
-  width: 16rem;
   font-size: 1.4rem;
-  gap: 0.8rem;
 
   img {
     width: 100%;
-    border-radius: 8px;
   }
 
   span {
@@ -56,7 +48,6 @@
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    font-size: 1.6rem;
   }
 
   @media screen and (max-width: 768px) {
@@ -68,10 +59,6 @@
   }
 
   @media screen and (max-width: 375px) {
-    width: 11rem;
-  }
-
-  @media screen and (max-width: 320px) {
     width: 10rem;
   }
 }

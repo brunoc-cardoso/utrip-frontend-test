@@ -22,14 +22,34 @@
   scrollbar-width: thin;
 }
 
-body,
+html,
+body {
+  background-color: #f0ebe3;
+}
+
 span,
 strong,
 div,
-p {
+p,
+select,
+input,
+button {
   font-size: 1.6rem;
 }
 
-body {
-  background-color: #f0ebe3;
+select,
+input,
+img,
+button {
+  border-radius: 8px;
+}
+
+select,
+input,
+button {
+  border: 1px solid #52525b;
+}
+
+div {
+  gap: 1.2rem;
 }
