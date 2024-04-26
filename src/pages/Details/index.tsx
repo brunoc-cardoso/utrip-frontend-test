@@ -4,10 +4,10 @@ import { EpisodesList } from "@/components/EpisodesList";
 import { Header } from "@/components/Header";
 import { LoadingComponent } from "@/components/LoadingComponent";
 import { ShowsContext } from "@/context/shows";
-import styles from "@/pages/Detail/styles.module.scss";
+import styles from "@/pages/Details/styles.module.scss";
 import { removeTagsFromText } from "@/utils/removeTagsFromText";
 
-export function Detail() {
+export function Details() {
   const {
     selectedShow: show,
     seasons,

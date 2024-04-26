@@ -1,6 +1,6 @@
 import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 
-import { Detail } from "@/pages/Detail";
+import { Details } from "@/pages/Details";
 import { Home } from "@/pages/Home";
 
 function NoMatch() {
@@ -18,7 +18,7 @@ export function Router() {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/details" element={<Detail />} />
+        <Route path="/details" element={<Details />} />
         <Route path="*" element={<NoMatch />} />
       </Routes>
     </BrowserRouter>
