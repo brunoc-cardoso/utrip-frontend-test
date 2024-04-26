@@ -18,6 +18,10 @@ export const getShow = async ({ showId }: { showId: number }) => {
     const response = await fetch(`${BASE_URL}/shows/${showId}`);
     const data = await response.json();
 
+    if (data?.status === 404) {
+      return (window.location.href = "/404");
+    }
+
     return data;
   } catch (error) {
     toast.error("An error occurred while loading data from Show.");
