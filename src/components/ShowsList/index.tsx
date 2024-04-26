@@ -1,15 +1,16 @@
-import { useContext } from "react";
 import { Link } from "react-router-dom";
 
 import styles from "@/components/ShowsList/styles.module.scss";
-import { ShowsContext } from "@/context/shows";
+import { ShowsGrouped } from "@/context/shows/types";
 
-export function ShowsList() {
-  const { showsGrouped } = useContext(ShowsContext);
+type ShowListProps = {
+  shows: ShowsGrouped[];
+};
 
+export function ShowsList({ shows }: ShowListProps) {
   return (
     <div className={styles.container}>
-      {showsGrouped?.map(({ gender, shows }) => (
+      {shows?.map(({ gender, shows }) => (
         <div className={styles.listContainer} key={gender}>
           <h3>{gender}</h3>
 
