@@ -5,7 +5,7 @@ import styles from "@/components/ShowsList/styles.module.scss";
 import { ShowsContext } from "@/context/shows";
 
 export function ShowsList() {
-  const { showsGrouped, handleSelectShow } = useContext(ShowsContext);
+  const { showsGrouped } = useContext(ShowsContext);
 
   return (
     <div className={styles.container}>
@@ -15,11 +15,12 @@ export function ShowsList() {
 
           <div className={styles.list}>
             {shows.map((show) => (
-              <Link to="/details" className={styles.textLink} key={show.id}>
-                <div
-                  className={styles.card}
-                  onClick={() => handleSelectShow({ show })}
-                >
+              <Link
+                to={`/details?showId=${show.id}`}
+                className={styles.textLink}
+                key={show.id}
+              >
+                <div className={styles.card}>
                   <img
                     src={show.image.medium}
                     alt={`Cover image from ${show.name}`}

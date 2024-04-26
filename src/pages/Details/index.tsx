@@ -1,20 +1,30 @@
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 import { EpisodesList } from "@/components/EpisodesList";
 import { Header } from "@/components/Header";
 import { LoadingComponent } from "@/components/LoadingComponent";
 import { ShowsContext } from "@/context/shows";
+import { useQuery } from "@/hooks/useQuery";
 import styles from "@/pages/Details/styles.module.scss";
 import { removeTagsFromText } from "@/utils/removeTagsFromText";
 
 export function Details() {
+  const queryParams = useQuery();
+  const navigate = useNavigate();
+
+  const [showId] = useState<number | undefined>(() => {
+    const showId = queryParams.get("showId");
+    return Number(showId);
+  });
+
   const {
     selectedShow: show,
     seasons,
     loading,
     onSelectSeason,
     episodesBySeason,
-    loadSeasonsAndEpisodes,
+    loadShowDetails,
   } = useContext(ShowsContext);
 
   const Info = ({ title, value }: { title: string; value: string }) => {
@@ -27,7 +37,11 @@ export function Details() {
   };
 
   useEffect(() => {
-    loadSeasonsAndEpisodes();
+    if (!showId) {
+      return navigate("/404");
+    }
+
+    loadShowDetails({ showId: showId });
   }, []);
 
   return (
@@ -47,7 +61,7 @@ export function Details() {
               <Info title="Title" value={show.name} />
               <Info
                 title="Description"
-                value={removeTagsFromText({ text: show.summary })}
+                value={removeTagsFromText({ text: show?.summary || "" })}
               />
             </div>
           </div>

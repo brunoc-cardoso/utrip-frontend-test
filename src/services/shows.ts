@@ -13,6 +13,17 @@ export const getShows = async () => {
   }
 };
 
+export const getShow = async ({ showId }: { showId: number }) => {
+  try {
+    const response = await fetch(`${BASE_URL}/shows/${showId}`);
+    const data = await response.json();
+
+    return data;
+  } catch (error) {
+    toast.error("An error occurred while loading data from Show.");
+  }
+};
+
 export const getSeasons = async ({ showId }: { showId: number }) => {
   try {
     const response = await fetch(`${BASE_URL}/shows/${showId}/seasons`);
