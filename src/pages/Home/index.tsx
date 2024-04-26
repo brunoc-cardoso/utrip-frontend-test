@@ -7,7 +7,7 @@ import { ShowsContext } from "@/context/shows";
 import styles from "@/pages/Home/styles.module.scss";
 
 export function Home() {
-  const { loadShows, loading } = useContext(ShowsContext);
+  const { loadShows, loading, showsGrouped } = useContext(ShowsContext);
 
   useEffect(() => {
     loadShows();
@@ -17,9 +17,7 @@ export function Home() {
     <div className={styles.container}>
       <Header />
 
-      {loading && <LoadingComponent />}
-
-      {!loading && <ShowsList />}
+      {loading ? <LoadingComponent /> : <ShowsList shows={showsGrouped} />}
     </div>
   );
 }
